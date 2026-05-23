@@ -103,13 +103,13 @@ html,body{min-height:100%;font-family:var(--font);font-size:14px;background:var(
 
 /* CHART */
 .chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.25rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.chart-label{font-size:11px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
-.chart-bars{display:flex;align-items:flex-end;gap:8px;height:130px}
+.chart-label{font-size:11px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem;position:relative;z-index:2;background:var(--card);display:inline-block;padding-right:8px}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:4px}
 .chart-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
 .chart-bar{width:100%;border-radius:6px 6px 0 0;background:var(--accent-dim);border:1.5px solid var(--accent);min-height:4px;transition:height .6s ease}
 .chart-bar.own{background:rgba(212,160,23,.15);border-color:var(--gold)}
 .chart-col-label{font-size:10px;color:var(--text3);text-align:center;line-height:1.2}
-.chart-col-val{font-size:10px;color:var(--accent);font-family:var(--display);font-weight:700}
+.chart-col-val{font-size:9px;color:var(--accent);font-family:var(--display);font-weight:700;margin-bottom:2px}
 
 /* EMPRESA TABS (admin) */
 .empresa-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem}
@@ -327,13 +327,13 @@ html,body{min-height:100%;font-family:var(--font);font-size:14px;background:var(
 
   /* Carga de ventas */
   .carga-card{padding:1rem}
-  .prod-row{grid-template-columns:52px 1fr 42px;gap:8px;align-items:center}
-  .prod-logo-wrap{width:52px!important;min-width:52px!important;height:36px!important;padding:5px 6px!important;border-radius:8px}
-  .prod-logo{height:24px!important;max-width:42px!important}
-  .prod-input{padding:9px 8px;font-size:14px;text-align:center}
-  .prod-pts-lbl{font-size:10px}
-  .confirm-btn{padding:15px;font-size:14px}
-  .cat-hdr{margin-top:1.25rem;margin-bottom:6px}
+  .prod-row{grid-template-columns:80px 1fr 46px;gap:8px;align-items:center}
+  .prod-logo-wrap{width:80px!important;min-width:80px!important;height:50px!important;padding:6px 8px!important;border-radius:10px}
+  .prod-logo{height:36px!important;max-width:68px!important}
+  .prod-input{padding:12px 8px;font-size:16px;text-align:center}
+  .prod-pts-lbl{font-size:11px}
+  .confirm-btn{padding:16px;font-size:14px}
+  .cat-hdr{margin-top:1.25rem;margin-bottom:8px}
   .ctag{font-size:10px;padding:4px 10px}
 
   /* Ranking */
