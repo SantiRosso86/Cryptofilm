@@ -103,8 +103,9 @@ html,body{min-height:100%;font-family:var(--font);font-size:14px;background:var(
 
 /* CHART */
 .chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.25rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.chart-label{font-size:11px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem;position:relative;z-index:2;background:var(--card);display:inline-block;padding-right:8px}
-.chart-bars{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:4px}
+.chart-label{font-size:11px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
+.chart-empresa-label{font-size:11px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem;font-family:var(--display)}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:140px;margin-top:8px}
 .chart-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
 .chart-bar{width:100%;border-radius:6px 6px 0 0;background:var(--accent-dim);border:1.5px solid var(--accent);min-height:4px;transition:height .6s ease}
 .chart-bar.own{background:rgba(212,160,23,.15);border-color:var(--gold)}
@@ -504,7 +505,6 @@ html,body{min-height:100%;font-family:var(--font);font-size:14px;background:var(
         <div id="rank-empresa-tabs" class="empresa-tabs" style="display:none"></div>
         <div class="stats-grid" id="rank-stats"></div>
         <div class="chart-wrap">
-          <div class="chart-label" id="rank-chart-label">Mercado $CFILM</div>
           <div class="chart-bars" id="rank-chart"></div>
         </div>
         <div class="rank-list">
@@ -915,19 +915,31 @@ function renderRanking(){
     const emp=getEmpresa(sesion.empresaId);
     empLabel=emp?'— '+emp.nombre:'';
   }
-  document.getElementById('rank-chart-label').textContent='Mercado $CFILM '+empLabel;
+  // chart label removed - shown in stats section
+  const empLabelShort=sesion.role==='admin'?(rankEmpresaFiltro?(getEmpresa(rankEmpresaFiltro)?.nombre||''):'Global'):(getEmpresa(sesion.empresaId)?.nombre||'');
   document.getElementById('rank-stats').innerHTML=`
     <div class="stat"><div class="stat-label">$CFILM circulante</div><div class="stat-val">${fmt(total)}</div></div>
     <div class="stat"><div class="stat-label">Transacciones</div><div class="stat-val">${historial.filter(h=>sesion.role==='admin'?(rankEmpresaFiltro===null||h.empresaId===rankEmpresaFiltro):(h.empresaId===sesion.empresaId)).length}</div></div>
     <div class="stat"><div class="stat-label">Holders</div><div class="stat-val">${visibles.length}</div></div>
     <div class="stat"><div class="stat-label">Premios</div><div class="stat-val">${PREMIOS.length}</div></div>`;
+  // Show empresa above chart
+  const chartWrap=document.querySelector('#tab-ranking .chart-wrap');
+  if(chartWrap){
+    const existing=chartWrap.querySelector('.chart-empresa-label');
+    if(existing)existing.remove();
+    if(empLabelShort){
+      const lbl=document.createElement('div');
+      lbl.className='chart-empresa-label';
+      lbl.textContent='Mercado $CFILM — '+empLabelShort;
+      chartWrap.insertBefore(lbl,chartWrap.firstChild);
+    }
+  }
   document.getElementById('rank-chart').innerHTML=sorted.map(c=>{
     const pts=gp(c.id);
     const h=maxPts>0?Math.round((pts/maxPts)*110):4;
     const own=sesion&&c.id===sesion.id;
     return`<div class="chart-col">
-      <div class="chart-col-val">${fmt(pts)}</div>
-      <div class="chart-bar${own?' own':''}" style="height:${h}px"></div>
+      <div class="chart-bar${own?' own':''}" style="height:${h}px" title="${c.nombre}: ${fmt(pts)} $CFILM"></div>
       <div class="chart-col-label">${getInitials(c.nombre)}</div>
     </div>`;
   }).join('');
