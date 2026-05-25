@@ -133,14 +133,14 @@ html,body{min-height:100%;font-family:var(--font);font-size:14px;background:var(
 .prod-name{font-size:13px;color:var(--text)}
 .prod-unit-lbl{font-size:10px;color:var(--text3)}
 .prod-pts-lbl{font-size:11px;color:var(--text3);text-align:right}
-.prod-logo-wrap{display:flex;align-items:center;justify-content:flex-start;width:100%;background:var(--bg3);border-radius:10px;padding:10px 16px;height:56px;border:1px solid var(--border)}
+.prod-logo-wrap{display:flex;align-items:center;justify-content:flex-start;width:100%;background:var(--bg3);border-radius:10px;padding:10px 16px;border:1px solid var(--border);min-height:56px}
 .prod-logo{height:36px;width:auto;max-width:160px;object-fit:contain;filter:grayscale(100%) opacity(0.7);transition:filter .2s}
 .prod-row:hover .prod-logo{filter:grayscale(0%) opacity(1)}
-.prod-row{display:grid;grid-template-columns:1fr 120px 60px;gap:10px;align-items:center;margin-bottom:10px}
+.prod-row{display:grid;grid-template-columns:180px 1fr 60px;gap:10px;align-items:stretch;margin-bottom:10px}
 .prod-pts-lbl{font-size:12px;color:var(--text3);text-align:right;font-family:var(--display);font-weight:600}
 .cat-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;margin-top:1.5rem}
 .ctag{font-size:11px;padding:5px 14px;border-radius:20px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.prod-input{background:var(--bg);border:1.5px solid var(--border2);border-radius:10px;padding:10px 12px;color:var(--text);font-family:var(--display);font-size:15px;font-weight:600;width:100%;outline:none;text-align:center}
+.prod-input{background:var(--bg);border:1.5px solid var(--border2);border-radius:10px;padding:10px 12px;color:var(--text);font-family:var(--display);font-size:15px;font-weight:600;width:100%;outline:none;text-align:center;height:100%;min-height:56px;display:flex;align-items:center}
 .prod-input:focus{border-color:var(--accent)}
 .prod-input{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:7px 10px;color:var(--text);font-family:var(--font);font-size:13px;width:100%;outline:none}
 .prod-input:focus{border-color:var(--accent)}
@@ -327,10 +327,10 @@ html,body{min-height:100%;font-family:var(--font);font-size:14px;background:var(
 
   /* Carga de ventas */
   .carga-card{padding:1rem}
-  .prod-row{grid-template-columns:80px 1fr 46px;gap:8px;align-items:center}
-  .prod-logo-wrap{width:80px!important;min-width:80px!important;height:50px!important;padding:6px 8px!important;border-radius:10px}
-  .prod-logo{height:36px!important;max-width:68px!important}
-  .prod-input{padding:12px 8px;font-size:16px;text-align:center}
+  .prod-row{grid-template-columns:100px 1fr 46px!important;gap:8px;align-items:stretch!important}
+  .prod-logo-wrap{width:100px!important;min-width:100px!important;min-height:60px!important;height:auto!important;padding:8px 10px!important;border-radius:10px;display:flex!important;align-items:center!important}
+  .prod-logo{height:42px!important;max-width:84px!important}
+  .prod-input{padding:12px 8px!important;font-size:16px!important;text-align:center!important;min-height:60px!important;height:auto!important}
   .prod-pts-lbl{font-size:11px}
   .confirm-btn{padding:16px;font-size:14px}
   .cat-hdr{margin-top:1.25rem;margin-bottom:8px}
