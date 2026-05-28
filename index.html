@@ -755,7 +755,11 @@ async function loadFromFirebase(){
       }
       if(d.premios)PREMIOS=d.premios;
       if(d.puntos)puntos=d.puntos;
-      if(d.carrusel)CARRUSEL=d.carrusel;
+      if(d.carrusel && d.carrusel.length>0){
+        CARRUSEL=d.carrusel;
+        // Ensure all items have activo field
+        CARRUSEL.forEach(c=>{ if(c.activo===undefined)c.activo=true; if(!c.tipo)c.tipo='texto'; });
+      }
     }
     const hs=await db.collection('historial').orderBy('ts','asc').get();
     historial=hs.docs.map(d=>d.data())
@@ -1457,8 +1461,20 @@ async function guardarCarrusel(){
       if(c.tipo==='producto') c.dosis=x.value;
       else c.texto=x.value;
     }
+    // Make sure activo is always a boolean
+    if(c.activo===undefined)c.activo=true;
   });
-  await saveMain();
+  // Save to Firebase explicitly
+  try{
+    await db.collection('config').doc('main').update({
+      carrusel: CARRUSEL,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    console.log('Carrusel saved OK, items:', CARRUSEL.length);
+  }catch(e){
+    // If update fails (doc doesn't exist), use set
+    await saveMain();
+  }
   renderCarruselSlot();
   const f=document.getElementById('flash-carrusel');
   f.style.display='inline';setTimeout(()=>f.style.display='none',2500);
